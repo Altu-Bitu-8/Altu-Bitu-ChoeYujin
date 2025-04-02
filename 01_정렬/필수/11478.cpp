@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 #include<set>
 using namespace std;
@@ -7,16 +7,14 @@ int main(){
 	string s;
 	cin >> s;
 
-	//Àß¸° ¹®ÀÚ¿­À» º¸°üÇÒ ÀÚ·á±¸Á¶, set:Áßº¹x·Î ÀúÀå
-	//ÇØ´ç ¹®Á¦´Â Á¤·ÄÀ» ÇÊ¿ä·ÎÇÏÁö ¾ÊÀ¸¹Ç·Î unordered_setÀ» »ç¿ëÇÒ °æ¿ì ½Ã°£º¹Àâµµ °³¼±
-	set<string> block; 
+	set<string> block; //ì˜ë¦° ë¬¸ìì—´ì„ ë³´ê´€í•  ìë£Œêµ¬ì¡°, set: ì¤‘ë³µx
 
-	for(int i=0; i<s.size(); i++){//¼­ºê¹®ÀÚ¿­ ½ÃÀÛ ÀÎµ¦½º
-	    for(int j=1; j<=s.size(); j++){//¼­ºê ¹®ÀÚ¿­ ±æÀÌÀÌ
+	for(int i=0; i<s.size(); i++){//ì„œë¸Œë¬¸ìì—´ ì‹œì‘ ì¸ë±ìŠ¤
+	    for(int j=1; j<=s.size(); j++){//ì„œë¸Œ ë¬¸ìì—´ ê¸¸ì´ì´
 	        block.insert(s.substr(i, j));
 	    }
 	}
 
-	cout << block.size(); //setÀÇ ¿ø¼Ò ¼ö ¹İÈ¯
+	cout << block.size(); //setì˜ ì›ì†Œ ìˆ˜ ë°˜í™˜
 
-}	
+}
