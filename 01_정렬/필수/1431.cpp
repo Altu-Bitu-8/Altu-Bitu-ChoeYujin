@@ -1,29 +1,32 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include<string>
 #include<algorithm>
 using namespace std;
+
+void sum(string a, int &asum){//ë¬¸ìì—´ì˜ ìˆ«ìì˜ í•©ì„ ë°˜í™˜í•˜ëŠ” í•¨ìˆ˜
+	for(int i=0; i<a.size(); i++){
+		if('0'<=a[i] && a[i]<='9'){//ë¬¸ìê°€ ìˆ«ìì¼ ë–„ í•©ì„ ë”í•¨
+			asum += int(a[i])-48;
+		}
+	}
+}
 
 bool cmp(string a, string b) {
 	int alength = a.size();
 	int blength = b.size();
 	int asum = 0;
-	int bsum = 0;//ÃÊ±âÈ­
+	int bsum = 0;//ì´ˆê¸°í™”
 
-	if (a.size() != b.size()) //±æÀÌ ¼ø¼­´ë·Î Á¤·Ä
+	if (a.size() != b.size()) //ê¸¸ì´ ìˆœì„œëŒ€ë¡œ ì •ë ¬
 		return a.size() < b.size();
 
-	for (int i = 0; i < a.size(); i++) {//±æÀÌ°¡ °°À» ¶§ÀÇ aÀÇ Á¤¼öÇÕÇÕ
-		if ('0' <= a[i] && a[i] <= '9') //¼ıÀÚÀÏ¶§
-			asum += int(a[i]) - 48;//ÇÕÀ» ´õÇÔ
-	}
-	for (int i = 0; i < b.size(); i++) {//bÀÇ Á¤¼ö°ª
-		if ('0' <= b[i] && b[i]<= '9') //¼ıÀÚÀÏ¶§
-			bsum += int(b[i]) - 48;//ÇÕÀ» ´õÇÔ
-	} 
-	if (asum != bsum) 
-		return asum < bsum;//±æÀÌ°¡ °°´Ù¸é ¼ıÀÚµéÀÇ ÇÕÀ¸·Î Á¤·Ä
+	sum(a, asum);//ì•ì„œ ì •ì˜í•œ í•¨ìˆ˜ë¥¼ ì´ìš©í•´ ë¬¸ìì—´ a,b ê°ê°ì˜ í•©ì„ êµ¬í•¨
+	sum(b, bsum);
 
-	return a < b; // ÇÕÀÌ °°´Ù¸é »çÀü¼øÀ¸·Î Á¤·Ä
+	if (asum != bsum) 
+		return asum < bsum;//ê¸¸ì´ê°€ ê°™ë‹¤ë©´ ìˆ«ìë“¤ì˜ í•©ìœ¼ë¡œ ì •ë ¬
+
+	return a < b; // í•©ì´ ê°™ë‹¤ë©´ ì‚¬ì „ìˆœìœ¼ë¡œ ì •ë ¬
 
 }
 
@@ -31,14 +34,16 @@ int main()
 {
 	int n;
 	cin >> n;
-	string s[50]; //½Ã¸®¾ó ÃÖ´ë ±æÀÌ°¡ 50ÀÌ¹Ç·Î
+	string s[50]; //ì‹œë¦¬ì–¼ ìµœëŒ€ ê¸¸ì´ê°€ 50ì´ë¯€ë¡œ
 
 	for (int i = 0; i < n; i++) {
-		cin >> s[i]; //½Ã¸®¾óÀ» ÀÔ·Â¹ŞÀ½
+		cin >> s[i]; //ì‹œë¦¬ì–¼ì„ ì…ë ¥ë°›ìŒ
 	}
 
-	sort(s, s + n, cmp); //»ó´Ü¿¡¼­ Á¤ÇÑ ±ÔÄ¢´ë·Î Á¤·Ä
+	sort(s, s + n, cmp); //ìƒë‹¨ì—ì„œ ì •í•œ ê·œì¹™ëŒ€ë¡œ ì •ë ¬
 	
 	for (int i = 0; i < n; i++)
-		cout << s[i] << '\n'; //Á¤·ÄÇÑ °ÍÀ» Ãâ·Â
+		cout << s[i] << '\n'; //ì •ë ¬í•œ ê²ƒì„ ì¶œë ¥
+
+	return 0;
 }
