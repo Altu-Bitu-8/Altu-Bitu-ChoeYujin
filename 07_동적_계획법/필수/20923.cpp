@@ -19,14 +19,14 @@ string judge(cards& deck) {//덱을 인자로 받아 승부결과(do/su/dosu)를
 	else if (do_deck < su_deck) {//수연의 덱에 카드가 더 많이 남았을 경우
 		return "su";//수연의 승리
 	}
-	return "dosu";//위의 두 케이스에 해당x = 카드의 수가 같음 = 무승부부
+	return "dosu";//위의 두 케이스에 해당x = 카드의 수가 같음 = 무승부
 }
 
 /** 그라운드에서 덱으로 카드 옮기기 */
 void groundToDeck(deque<int>& deck, deque<int>& ground) {
 	while (!ground.empty()) {//그라운드에 카드가 있는 동안
 		deck.push_back(ground.back());//그라운드에 있는 카드를 덱의 맨 뒤에 push
-		ground.pop_back();//그라운드에서 해당 카드 삭제제
+		ground.pop_back();//그라운드에서 해당 카드 삭제
 	}
 }
 
@@ -46,24 +46,24 @@ int whoCanRingTheBell(cards& deck, cards& ground) {//그라운드와 덱에 남�
 		return DO;//도도가 종을 침침
 	}
 	else if (!ground[DO].empty() && !ground[SU].empty() && (ground[DO].front() + ground[SU].front() == 5)) { // 수연
-		return SU;//카드가 비여있지 않음&&두 카드의 합이 5가 됨->수연이가 종을 침침
+		return SU;//카드가 비여있지 않음&&두 카드의 합이 5가 됨->수연이가 종을 침
 	}
 	return -1; // 종을 울릴 수 없음
 }
 
 /** 게임 진행 */
 string game(int m, cards& deck, cards& ground) {
-	bool turn = DO; // 도도 먼저(DO=0으로 정의한 것을 사용용)
+	bool turn = DO; // 도도 먼저(DO=0으로 정의한 것을 사용)
 	while (m--) {//m번만큼 반복복
 		ground[turn].push_front(deck[turn].front()); // 카드 내려놓기(덱 -> 그라운드)
 		deck[turn].pop_front();//덱에서 내려놓은 카드 삭제(pop)
-		if (deck[turn].empty()) {//덱이 비어있다면면
-			break;//m번만큼 반복하지 않고 탈출->승패를 판단단
+		if (deck[turn].empty()) {//덱이 비어있다면
+			break;//m번만큼 반복하지 않고 탈출->승패를 판단
 		}
 
-		int bell = whoCanRingTheBell(deck, ground); // 카드를 내려 놓을 때마다 종을 울릴 수 있는지 판단단
+		int bell = whoCanRingTheBell(deck, ground); // 카드를 내려 놓을 때마다 종을 울릴 수 있는지 판단
 		if (bell != -1) { // 종을 울린 경우
-			ringTheBell(bell, deck, ground);//ringTheBell함수를 통해 그라운드에 있는 카드를 가져갈 수 있게함함
+			ringTheBell(bell, deck, ground);//ringTheBell함수를 통해 그라운드에 있는 카드를 가져갈 수 있게함
 		}
 		turn = !turn; // 차례 바꾸기(bool값이므로 !로 전환이 가능) do->su/ su->do
 	}
@@ -86,14 +86,14 @@ int main() {
 
 	// 입력
 	cin >> n >> m;
-	while (n--) {//n개의 카드를 입력 받기기
+	while (n--) {//n개의 카드를 입력 받기
 		cin >> card1 >> card2;
 		deck[DO].push_front(card1);//do의 카드덱에 카드 추가. 밑의 카드부터 입력받으므로 front로 push
-		deck[SU].push_front(card2);//su의 카드덱에 카드 추가가
+		deck[SU].push_front(card2);//su의 카드덱에 카드 추가
 	}
 
 	// 출력 & 연산
-	cout << game(m, deck, ground);//승부 결과 연산과 동시에 출력력
+	cout << game(m, deck, ground);//승부 결과 연산과 동시에 출력
 
 	return 0;
 }
